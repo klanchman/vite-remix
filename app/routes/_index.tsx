@@ -23,15 +23,25 @@ export default function Index() {
           </Link>
         </li>
         <li>
-          <Link href="https://remix.run/docs">
-            Remix Docs
-          </Link>
+          <Link href="https://remix.run/docs">Remix Docs</Link>
         </li>
       </ul>
     </div>
   );
 }
 
-const Link: React.FC<React.PropsWithChildren<{ href: string }>> = ({ children, href }) => {
-  return <a className="text-blue-600 visited:text-purple-500" href={href} target="_blank" rel="noreferrer">{children}</a>
-}
+const Link: React.FC<React.PropsWithChildren<{ href: string }>> = ({
+  children,
+  href,
+}) => {
+  return (
+    <a
+      className="text-blue-600 visited:text-purple-500"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {children}
+    </a>
+  );
+};
