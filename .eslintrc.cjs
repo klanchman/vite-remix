@@ -22,7 +22,12 @@ module.exports = {
   },
 
   // Base config
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "plugin:prettier/recommended",
+  ],
   rules: {
     "prettier/prettier": "warn",
   },
