@@ -27,7 +27,7 @@ module.exports = {
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
     "plugin:prettier/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
   ],
   rules: {
     "prettier/prettier": "warn",

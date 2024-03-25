@@ -5,14 +5,21 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 installGlobals();
 
+const isVitest = !!process.env.VITEST;
 const isStorybook = process.argv[1]?.includes("storybook");
+const loadRemix = !isVitest && !isStorybook;
 
 export default defineConfig({
   plugins: [
-    !isStorybook &&
+    loadRemix &&
       remix({
         ignoredRouteFiles: ["**/*.test.*"],
       }),
     tsconfigPaths(),
   ],
+  test: {
+    globals: true,
+    environment: "happy-dom",
+    setupFiles: ["./test/setup-test-env.ts"],
+  },
 });

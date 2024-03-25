@@ -1,5 +1,6 @@
 import { MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import ky from "ky";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,8 +9,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = () => {
-  return json({ message: "Hello!" });
+export const loader = async () => {
+  const data = await ky
+    .get("https://jsonplaceholder.typicode.com/todos/1")
+    .json<{ title: string }>();
+
+  return json({ message: data.title });
 };
 
 export default function Index() {
