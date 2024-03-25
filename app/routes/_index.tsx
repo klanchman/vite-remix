@@ -2,6 +2,8 @@ import { MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import ky from "ky";
 
+import { DB } from "~/db.server";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -10,11 +12,14 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async () => {
-  const data = await ky
-    .get("https://jsonplaceholder.typicode.com/todos/1")
-    .json<{ title: string }>();
+  const [userData, todoData] = await Promise.all([
+    DB.client.user.findFirstOrThrow(),
+    ky
+      .get("https://jsonplaceholder.typicode.com/todos/1")
+      .json<{ title: string }>(),
+  ]);
 
-  return json({ message: data.title });
+  return json({ todo: todoData.title, user: userData.name });
 };
 
 export default function Index() {
@@ -38,7 +43,8 @@ export default function Index() {
           <Link href="https://remix.run/docs">Remix Docs</Link>
         </li>
       </ul>
-      <p>Async data: {data.message}</p>
+      <p>Todo (from remote server): {data.todo}</p>
+      <p>User (from database): {data.user}</p>
     </div>
   );
 }

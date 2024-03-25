@@ -6,7 +6,7 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
-    "test": "vitest",
+    "test": "dotenv -e .env.test -- vitest",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
@@ -16,13 +16,15 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@prisma/client": "^5.11.0",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
     "@remix-run/serve": "^2.8.1",
     "isbot": "^4.1.0",
     "ky": "^1.2.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tiny-invariant": "^1.3.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.1",
@@ -43,6 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "autoprefixer": "^10.4.18",
+    "dotenv-cli": "^7.4.1",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -60,8 +63,10 @@
     "postcss": "^8.4.36",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.12",
+    "prisma": "^5.11.0",
     "storybook": "^8.0.2",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.1.6",
     "vite": "^5.1.6",
     "vite-tsconfig-paths": "^4.3.2",
@@ -69,5 +74,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm -r tsconfig-paths/register prisma/seed.ts"
   }
 }

@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 
+import { DB } from "~/db.server";
 import { server } from "~/mocks";
 
 import Index, { loader } from "./_index";
@@ -19,7 +20,14 @@ beforeEach(() => {
   );
 });
 
-beforeEach(() => {
+beforeEach(async () => {
+  await DB.client.user.create({
+    data: {
+      email: "bob@example.com",
+      name: "Bob Test",
+    },
+  });
+
   IndexStub = createRemixStub([
     {
       path: "/",
@@ -42,5 +50,8 @@ it("has a heading", async () => {
 it("loads data", async () => {
   render(<IndexStub />);
 
-  await waitFor(() => screen.findByText("Async data: I am in a test"));
+  await waitFor(() =>
+    screen.findByText("Todo (from remote server): I am in a test"),
+  );
+  await waitFor(() => screen.findByText("User (from database): Bob Test"));
 });
