@@ -10,6 +10,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    project: "tsconfig.json",
     ecmaFeatures: {
       jsx: true,
     },
@@ -47,6 +48,9 @@ module.exports = {
           typescript: {},
         },
       },
+      rules: {
+        'react/prop-types': 'off',
+      }
     },
 
     // Typescript
@@ -66,10 +70,13 @@ module.exports = {
         },
       },
       extends: [
-        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-type-checked",
         "plugin:import/recommended",
         "plugin:import/typescript",
       ],
+      rules: {
+        "@typescript-eslint/no-unused-vars": 'warn',
+      }
     },
 
     // Node
