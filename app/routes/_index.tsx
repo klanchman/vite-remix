@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,8 +10,8 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div className="p-5">
-      <h1 className="text-3xl font-semibold mb-4">Welcome to Remix</h1>
-      <ul className="list-disc ml-8">
+      <h1 className="mb-4 text-3xl font-semibold">Welcome to Remix</h1>
+      <ul className="ml-8 list-disc">
         <li>
           <Link href="https://remix.run/tutorials/blog">
             15m Quickstart Blog Tutorial
