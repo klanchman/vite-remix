@@ -9,33 +9,29 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
+    <div className="p-5">
+      <h1 className="text-3xl font-semibold mb-4">Welcome to Remix</h1>
+      <ul className="list-disc ml-8">
         <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
+          <Link href="https://remix.run/tutorials/blog">
             15m Quickstart Blog Tutorial
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
+          <Link href="https://remix.run/tutorials/jokes">
             Deep Dive Jokes App Tutorial
-          </a>
+          </Link>
         </li>
         <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
+          <Link href="https://remix.run/docs">
             Remix Docs
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
   );
+}
+
+const Link: React.FC<React.PropsWithChildren<{ href: string }>> = ({ children, href }) => {
+  return <a className="text-blue-600 visited:text-purple-500" href={href} target="_blank" rel="noreferrer">{children}</a>
 }
